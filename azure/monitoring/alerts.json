@@ -1,0 +1,69 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workspaceId": { "type": "string" },
+    "aksClusterName": { "type": "string" },
+    "resourceGroupName": { "type": "string" }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Insights/metricAlerts",
+      "apiVersion": "2018-03-01",
+      "name": "high-cpu-alert",
+      "location": "global",
+      "properties": {
+        "description": "Alert when CPU exceeds 90%",
+        "severity": 2,
+        "enabled": true,
+        "scopes": [
+          "[resourceId('Microsoft.ContainerService/managedClusters', parameters('aksClusterName'))]"
+        ],
+        "evaluationFrequency": "PT1M",
+        "windowSize": "PT5M",
+        "criteria": {
+          "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+          "allOf": [
+            {
+              "name": "cpu-check",
+              "metricName": "node_cpu_usage_percentage",
+              "metricNamespace": "Microsoft.ContainerService/managedClusters",
+              "operator": "GreaterThan",
+              "threshold": 90,
+              "timeAggregation": "Average"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Insights/metricAlerts",
+      "apiVersion": "2018-03-01",
+      "name": "pod-restart-alert",
+      "location": "global",
+      "properties": {
+        "description": "Alert on pod restarts",
+        "severity": 1,
+        "enabled": false,
+        "scopes": [
+          "[resourceId('Microsoft.ContainerService/managedClusters', parameters('aksClusterName'))]"
+        ],
+        "evaluationFrequency": "PT5M",
+        "windowSize": "PT30M",
+        "criteria": {
+          "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+          "allOf": [
+            {
+              "name": "restart-check",
+              "metricName": "kube_pod_status_restarts_total",
+              "metricNamespace": "Microsoft.ContainerService/managedClusters",
+              "operator": "GreaterThan",
+              "threshold": 3,
+              "timeAggregation": "Maximum"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

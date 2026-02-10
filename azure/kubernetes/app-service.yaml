@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-lab-app
+  namespace: devops-lab
+spec:
+  type: LoadBalancer
+  selector:
+    app: devopslab-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
