@@ -125,8 +125,15 @@ validate_inc_005() {
     if ! python3 -c "import yaml; yaml.safe_load(open('$CD'))" 2>/dev/null; then return; fi
     if ! grep -q "aws-actions/configure-aws-credentials@v4" "$CD" 2>/dev/null; then return; fi
     if grep -q "credentials:" "$CD" 2>/dev/null; then return; fi
-    if ! grep -q "aws-access-key-id" "$CD" 2>/dev/null; then return; fi
-    if ! grep -q "aws-secret-access-key" "$CD" 2>/dev/null; then return; fi
+    local HAS_KEYS=false
+    local HAS_OIDC=false
+    if grep -q "aws-access-key-id" "$CD" 2>/dev/null && grep -q "aws-secret-access-key" "$CD" 2>/dev/null; then
+        HAS_KEYS=true
+    fi
+    if grep -q "role-to-assume" "$CD" 2>/dev/null; then
+        HAS_OIDC=true
+    fi
+    if [ "$HAS_KEYS" = false ] && [ "$HAS_OIDC" = false ]; then return; fi
     if ! grep -q "aws-region" "$CD" 2>/dev/null; then return; fi
     if ! grep -q "aws eks update-kubeconfig" "$CD" 2>/dev/null; then return; fi
     if ! grep -q "kubectl" "$CD" 2>/dev/null; then return; fi

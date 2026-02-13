@@ -114,6 +114,8 @@ You're the new DevOps engineer. Seven incidents are waiting. Diagnose and fix ea
 
 **What to fix:** `aws/github-actions/cd.yml`
 
+**Note:** OIDC is the recommended approach.
+
 ---
 
 ### 🎫 INC-006: Kubernetes Deployment Crashing
