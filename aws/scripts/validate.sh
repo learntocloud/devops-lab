@@ -126,6 +126,9 @@ validate_inc_005() {
     if ! grep -q "aws-actions/configure-aws-credentials@v4" "$CD" 2>/dev/null; then return; fi
     if grep -q "credentials:" "$CD" 2>/dev/null; then return; fi
     if ! grep -q "aws-access-key-id" "$CD" 2>/dev/null; then return; fi
+    if ! grep -q "aws-secret-access-key" "$CD" 2>/dev/null; then return; fi
+    if ! grep -q "aws-region" "$CD" 2>/dev/null; then return; fi
+    if ! grep -q "aws eks update-kubeconfig" "$CD" 2>/dev/null; then return; fi
     if ! grep -q "kubectl" "$CD" 2>/dev/null; then return; fi
 
     INC_005="resolved"

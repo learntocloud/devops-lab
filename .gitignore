@@ -38,3 +38,7 @@ venv/
 
 # Solutions (maintainer only)
 **/solutions/
+
+# Full validation scripts (contain solutions)
+.github/skills/validate-devops-lab/aws/scripts/run-full-validation.sh
+.github/skills/validate-devops-lab/azure/scripts/run-full-validation.sh
