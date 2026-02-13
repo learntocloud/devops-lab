@@ -55,7 +55,7 @@ cleanup() {
   echo -e "${YELLOW}Cleaning up...${NC}"
 
   if [ "$SKIP_DESTROY" = false ]; then
-    "${AWS_DIR}/scripts/destroy.sh"
+    "${AWS_DIR}/scripts/destroy.sh" --auto-approve
   else
     echo -e "  ${YELLOW}SKIPPED (--skip-destroy)${NC}"
   fi
