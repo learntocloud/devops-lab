@@ -26,7 +26,7 @@ You've just joined a startup as the DevOps engineer. The previous engineer left,
 |----------|--------|-------|
 | Azure | ✅ Available | [azure/README.md](azure/README.md) |
 | AWS | 🚧 Coming soon | — |
-| GCP | 🚧 Coming soon | — |
+| GCP | ✅ Available | [gcp/README.md](gcp/README.md) |
 
 ## How It Works
 
@@ -42,7 +42,7 @@ You've just joined a startup as the DevOps engineer. The previous engineer left,
 After resolving all incidents, generate your completion token:
 
 ```bash
-cd azure/scripts
+cd <cloud>/scripts
 ./validate.sh export
 ```
 
@@ -50,7 +50,7 @@ Submit your token at [learntocloud.guide](https://learntocloud.guide) to verify 
 
 ## Cost
 
-~$3-5 per session (Azure). **Always destroy resources when done.**
+~$3-5 per session. **Always destroy resources when done.**
 
 ## License
 
