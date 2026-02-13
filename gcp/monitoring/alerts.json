@@ -1,0 +1,36 @@
+{
+  "alertPolicies": [
+    {
+      "displayName": "high-cpu-alert",
+      "enabled": true,
+      "severity": 2,
+      "conditions": [
+        {
+          "displayName": "cpu-check",
+          "conditionThreshold": {
+            "filter": "metric.type=\"kubernetes.io/node/cpu/core_usage_time\"",
+            "comparison": "COMPARISON_GT",
+            "thresholdValue": 0.9,
+            "duration": "60s"
+          }
+        }
+      ]
+    },
+    {
+      "displayName": "pod-restart-alert",
+      "enabled": false,
+      "severity": 1,
+      "conditions": [
+        {
+          "displayName": "restart-check",
+          "conditionThreshold": {
+            "filter": "metric.type=\"kubernetes.io/container/restart_count\"",
+            "comparison": "COMPARISON_GT",
+            "thresholdValue": 3,
+            "duration": "300s"
+          }
+        }
+      ]
+    }
+  ]
+}
