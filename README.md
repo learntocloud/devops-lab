@@ -25,7 +25,7 @@ You've just joined a startup as the DevOps engineer. The previous engineer left,
 | Provider | Status | Guide |
 |----------|--------|-------|
 | Azure | ✅ Available | [azure/README.md](azure/README.md) |
-| AWS | 🚧 Coming soon | — |
+| AWS | ✅ Available | [aws/README.md](aws/README.md) |
 | GCP | 🚧 Coming soon | — |
 
 ## How It Works
